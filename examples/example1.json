@@ -1,0 +1,71 @@
+[
+    {
+        "id": "ced2f1d32a929da2",
+        "type": "tab",
+        "label": "Example",
+        "disabled": false,
+        "info": "",
+        "env": []
+    },
+    {
+        "id": "1147514d2dbbb186",
+        "type": "debug",
+        "z": "ced2f1d32a929da2",
+        "name": "JSON debug",
+        "active": true,
+        "tosidebar": true,
+        "console": false,
+        "tostatus": false,
+        "complete": "payload",
+        "targetType": "msg",
+        "statusVal": "",
+        "statusType": "auto",
+        "x": 530,
+        "y": 160,
+        "wires": []
+    },
+    {
+        "id": "63211f906446b8db",
+        "type": "inject",
+        "z": "ced2f1d32a929da2",
+        "name": "",
+        "props": [
+            {
+                "p": "payload"
+            }
+        ],
+        "repeat": "",
+        "crontab": "",
+        "once": false,
+        "onceDelay": 0.1,
+        "topic": "",
+        "payload": "unset",
+        "payloadType": "str",
+        "x": 170,
+        "y": 160,
+        "wires": [
+            [
+                "b7ef94e1524dfdbe"
+            ]
+        ]
+    },
+    {
+        "id": "b7ef94e1524dfdbe",
+        "type": "secvest",
+        "z": "ced2f1d32a929da2",
+        "name": "",
+        "ip": "192.168.1.100",
+        "port": "4433",
+        "user": "Admin",
+        "password": "",
+        "partition": "1",
+        "command": "",
+        "x": 340,
+        "y": 160,
+        "wires": [
+            [
+                "1147514d2dbbb186"
+            ]
+        ]
+    }
+]

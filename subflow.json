@@ -1,0 +1,252 @@
+{
+    "id": "9adbc26d95d5d06e",
+    "type": "subflow",
+    "name": "Secvest",
+    "info": "Set/Unset/Partset your Secvest",
+    "category": "Secvest",
+    "in": [
+        {
+            "x": 60,
+            "y": 80,
+            "wires": [
+                {
+                    "id": "7acad276e603a291"
+                }
+            ]
+        }
+    ],
+    "out": [
+        {
+            "x": 900,
+            "y": 80,
+            "wires": [
+                {
+                    "id": "d3a1598c9f33bb5a",
+                    "port": 0
+                }
+            ]
+        }
+    ],
+    "env": [
+        {
+            "name": "ip",
+            "type": "str",
+            "value": ""
+        },
+        {
+            "name": "port",
+            "type": "str",
+            "value": "4433"
+        },
+        {
+            "name": "user",
+            "type": "str",
+            "value": "Admin"
+        },
+        {
+            "name": "password",
+            "type": "cred",
+            "ui": {
+                "label": {
+                    "en-US": "password"
+                }
+            }
+        },
+        {
+            "name": "partition",
+            "type": "str",
+            "value": "1",
+            "ui": {
+                "label": {
+                    "en-US": "partition"
+                },
+                "type": "select",
+                "opts": {
+                    "opts": [
+                        {
+                            "l": {
+                                "en-US": "1"
+                            },
+                            "v": "1"
+                        },
+                        {
+                            "l": {
+                                "en-US": "2"
+                            },
+                            "v": "2"
+                        },
+                        {
+                            "l": {
+                                "en-US": "3"
+                            },
+                            "v": "3"
+                        },
+                        {
+                            "l": {
+                                "en-US": "4"
+                            },
+                            "v": "4"
+                        }
+                    ]
+                }
+            }
+        },
+        {
+            "name": "command",
+            "type": "str",
+            "value": "",
+            "ui": {
+                "type": "select",
+                "opts": {
+                    "opts": [
+                        {
+                            "l": {
+                                "en-US": "unset"
+                            },
+                            "v": "unset"
+                        },
+                        {
+                            "l": {
+                                "en-US": "partset"
+                            },
+                            "v": "partset"
+                        },
+                        {
+                            "l": {
+                                "en-US": "set"
+                            },
+                            "v": "set"
+                        },
+                        {
+                            "l": {
+                                "en-US": "msg.payload"
+                            },
+                            "v": ""
+                        }
+                    ]
+                }
+            }
+        }
+    ],
+    "meta": {
+        "module": "node-red-contrib-secvest",
+        "type": "secvest",
+        "version": "0.0.8",
+        "author": "Yves Reiser",
+        "desc": "A node to control your Abus Secvest Alarm System",
+        "keywords": "node-red,secvest,abus,alarm",
+        "license": "MIT"
+    },
+    "color": "#87A980",
+    "inputLabels": [
+        "command"
+    ],
+    "icon": "icon.png",
+    "flow": [
+        {
+            "id": "7acad276e603a291",
+            "type": "function",
+            "z": "9adbc26d95d5d06e",
+            "name": "function 1",
+            "func": "var command='none';\nif(msg.payload==\"unset\" || msg.payload==\"set\" || msg.payload==\"partset\"){\n    command = msg.payload;\n}\nelse{\n    command = env.get('command');\n}\nconst user = env.get('user')+':'+env.get('password');\nconst buf = Buffer.from(user)\nconst encoded = buf.toString(\"base64\");\nmsg.url ='https://'+env.get('ip')+':'+env.get('port')+'/system/partitions-'+env.get('partition')+'/';\nmsg.headers={\"Authorization\": \"Basic \"+encoded};\nmsg.payload = {\"state\": command};\nreturn msg;",
+            "outputs": 1,
+            "noerr": 0,
+            "initialize": "",
+            "finalize": "",
+            "libs": [],
+            "x": 300,
+            "y": 80,
+            "wires": [
+                [
+                    "dccdb83845bffde0"
+                ]
+            ]
+        },
+        {
+            "id": "dccdb83845bffde0",
+            "type": "http request",
+            "z": "9adbc26d95d5d06e",
+            "name": "",
+            "method": "PUT",
+            "ret": "txt",
+            "paytoqs": "ignore",
+            "url": "",
+            "tls": "73b09a94857bc102",
+            "persist": false,
+            "proxy": "",
+            "insecureHTTPParser": false,
+            "authType": "",
+            "senderr": false,
+            "headers": [],
+            "x": 550,
+            "y": 80,
+            "wires": [
+                [
+                    "d3a1598c9f33bb5a"
+                ]
+            ]
+        },
+        {
+            "id": "d3a1598c9f33bb5a",
+            "type": "json",
+            "z": "9adbc26d95d5d06e",
+            "name": "",
+            "property": "payload",
+            "action": "",
+            "pretty": false,
+            "x": 770,
+            "y": 80,
+            "wires": [
+                []
+            ]
+        },
+        {
+            "id": "73b09a94857bc102",
+            "type": "tls-config",
+            "name": "",
+            "cert": "",
+            "key": "",
+            "ca": "",
+            "certname": "",
+            "keyname": "",
+            "caname": "",
+            "servername": "",
+            "verifyservercert": false,
+            "alpnprotocol": ""
+        },
+        {
+            "id": "edab89433883e120",
+            "type": "subflow:9adbc26d95d5d06e",
+            "z": "acb2df8b3c4eb35c",
+            "name": "",
+            "env": [
+                {
+                    "name": "ip",
+                    "value": "192.168.40.10",
+                    "type": "str"
+                },
+                {
+                    "name": "user",
+                    "value": "Yves",
+                    "type": "str"
+                },
+                {
+                    "name": "password",
+                    "type": "cred"
+                },
+                {
+                    "name": "command",
+                    "value": "unset",
+                    "type": "str"
+                }
+            ],
+            "x": 420,
+            "y": 400,
+            "wires": [
+                [
+                    "73804a6c7c7b1129"
+                ]
+            ]
+        }
+    ]
+}
