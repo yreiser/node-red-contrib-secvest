@@ -2,6 +2,7 @@ node-red-contrib-secvest
 =====================
 
 A node-red module to control/check the status of your Abus Secvest Alarm System
+Compatible with all ABUS Secvest FU5xxxx and FU6xxxx Systems.
 
 ## Install
 
