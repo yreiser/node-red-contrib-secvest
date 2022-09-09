@@ -1,13 +1,8 @@
 {
-  "name": "@yreiser/node-red-contrib-secvest",
-  "version": "0.0.18",
-  "description": "Node-RED node for ABUS Secvest Alarm Systems",
-  "repository": {
-    "type": "git",
-    "url": "https://github.com/yreiser/node-red-contrib-secvest"
-  },
+  "name": "node-red-contrib-secvest",
+  "version": "0.1.0",
+  "description": "Node-RED module for Abus Secvest Alarm Systems",
   "keywords": [
-    "node-red-nodegen", 
     "node-red", 
     "secvest", 
     "abus", 
@@ -19,11 +14,13 @@
   "node-red": {
     "version": ">=1.3.7",
     "nodes": {
-      "secvest": "subflow.js"
+      "command": "command.js",
+      "status": "status.js"
     }
   },
   "license": "MIT",
   "author": {
     "name": "Yves Reiser"
   }
+
 }

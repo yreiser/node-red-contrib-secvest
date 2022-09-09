@@ -1,0 +1,255 @@
+{
+    "id": "334e8e289bddfa97",
+    "type": "subflow",
+    "name": "Secvest Status",
+    "info": "Check the Status of your Secvest Alarm System",
+    "category": "Secvest",
+    "in": [
+        {
+            "x": 60,
+            "y": 200,
+            "wires": [
+                {
+                    "id": "6af9eaa97221b31b"
+                }
+            ]
+        }
+    ],
+    "out": [
+        {
+            "x": 850,
+            "y": 200,
+            "wires": [
+                {
+                    "id": "59b871fce2c956d7",
+                    "port": 0
+                }
+            ]
+        }
+    ],
+    "env": [
+        {
+            "name": "ip",
+            "type": "str",
+            "value": ""
+        },
+        {
+            "name": "port",
+            "type": "str",
+            "value": "4433"
+        },
+        {
+            "name": "user",
+            "type": "str",
+            "value": "Admin"
+        },
+        {
+            "name": "password",
+            "type": "cred",
+            "ui": {
+                "label": {
+                    "en-US": "password"
+                }
+            }
+        },
+        {
+            "name": "partition",
+            "type": "str",
+            "value": "1",
+            "ui": {
+                "label": {
+                    "en-US": "partition"
+                },
+                "type": "select",
+                "opts": {
+                    "opts": [
+                        {
+                            "l": {
+                                "en-US": "1"
+                            },
+                            "v": "1"
+                        },
+                        {
+                            "l": {
+                                "en-US": "2"
+                            },
+                            "v": "2"
+                        },
+                        {
+                            "l": {
+                                "en-US": "3"
+                            },
+                            "v": "3"
+                        },
+                        {
+                            "l": {
+                                "en-US": "4"
+                            },
+                            "v": "4"
+                        }
+                    ]
+                }
+            }
+        },
+        {
+            "name": "get",
+            "type": "str",
+            "value": "partitions",
+            "ui": {
+                "label": {
+                    "en-US": "get"
+                },
+                "type": "select",
+                "opts": {
+                    "opts": [
+                        {
+                            "l": {
+                                "en-US": "List all partitions"
+                            },
+                            "v": "partitions"
+                        },
+                        {
+                            "l": {
+                                "en-US": "Partition Details"
+                            },
+                            "v": "details"
+                        },
+                        {
+                            "l": {
+                                "en-US": "Partition Zones"
+                            },
+                            "v": "zones"
+                        },
+                        {
+                            "l": {
+                                "en-US": "Output State"
+                            },
+                            "v": "output"
+                        },
+                        {
+                            "l": {
+                                "en-US": "Faults"
+                            },
+                            "v": "faults"
+                        },
+                        {
+                            "l": {
+                                "en-US": "Logs"
+                            },
+                            "v": "logs"
+                        }
+                    ]
+                }
+            }
+        }
+    ],
+    "meta": {
+        "module": "secvest_status",
+        "type": "secvest_status",
+        "version": "0.0.1",
+        "author": "Yves Reiser",
+        "desc": "A node to check the status of your Abus Secvest Alarm System",
+        "license": "MIT",
+        "keywords": "node-red,secvest,abus,alarm"
+    },
+    "credentials": {
+        "password": ""
+    },
+    "color": "#FF8800",
+    "outputLabels": [
+        "json"
+    ],
+    "icon": "icon.png",
+    "flow": [
+        {
+            "id": "6af9eaa97221b31b",
+            "type": "function",
+            "z": "334e8e289bddfa97",
+            "name": "function 2",
+            "func": "var command=env.get('get');\nconst user = env.get('user')+':'+env.get('password');\nconst buf = Buffer.from(user)\nconst encoded = buf.toString(\"base64\");\nconst base_url = msg.url = 'https://' + env.get('ip') + ':' + env.get('port');\n\nif(command == 'partitions'){\nmsg.url=base_url+'/system/partitions/';\n}\nelse if (command == 'details') {\n    msg.url = base_url + '/system/partitions-'+env.get('partition')+'/';\n}\nelse if (command == 'zones') {\n    msg.url = base_url + '/system/partitions-' + env.get('partition') + '/zones/';\n}\nelse if (command == 'output') {\n    msg.url = base_url + '/output/';\n}\nelse if (command == 'faults') {\n    msg.url = base_url + '/faults/';\n}\nelse if (command == 'logs') {\n    msg.url = base_url + '/logs/';\n}\n\nmsg.headers={\"Authorization\": \"Basic \"+encoded};\nmsg.payload = {\"state\": command};\nreturn msg;",
+            "outputs": 1,
+            "noerr": 0,
+            "initialize": "",
+            "finalize": "",
+            "libs": [],
+            "x": 220,
+            "y": 200,
+            "wires": [
+                [
+                    "4932a648f0c04975"
+                ]
+            ]
+        },
+        {
+            "id": "4932a648f0c04975",
+            "type": "http request",
+            "z": "334e8e289bddfa97",
+            "name": "",
+            "method": "GET",
+            "ret": "txt",
+            "paytoqs": "ignore",
+            "url": "",
+            "tls": "73b09a94857bc102",
+            "persist": false,
+            "proxy": "",
+            "insecureHTTPParser": false,
+            "authType": "",
+            "senderr": false,
+            "headers": [],
+            "x": 470,
+            "y": 200,
+            "wires": [
+                [
+                    "59b871fce2c956d7"
+                ]
+            ]
+        },
+        {
+            "id": "59b871fce2c956d7",
+            "type": "json",
+            "z": "334e8e289bddfa97",
+            "name": "",
+            "property": "payload",
+            "action": "",
+            "pretty": false,
+            "x": 690,
+            "y": 200,
+            "wires": [
+                []
+            ]
+        },
+        {
+            "id": "73b09a94857bc102",
+            "type": "tls-config",
+            "name": "",
+            "cert": "",
+            "key": "",
+            "ca": "",
+            "certname": "",
+            "keyname": "",
+            "caname": "",
+            "servername": "",
+            "verifyservercert": false,
+            "alpnprotocol": ""
+        },
+        {
+            "id": "46204c7143e76ae2",
+            "type": "subflow:334e8e289bddfa97",
+            "z": "acb2df8b3c4eb35c",
+            "name": "",
+            "env": [
+                {
+                    "name": "password",
+                    "type": "cred"
+                }
+            ],
+            "x": 400,
+            "y": 140,
+            "wires": [
+                [
+                    "fb50adfa165c99e0"
+                ]
+            ]
+        }
+    ]
+}
