@@ -10,6 +10,8 @@ Run the following command in your Node-RED user directory - typically `~/.node-r
 
         npm install node-red-contrib-secvest
 
+or install via 'Manage Panel' in Node-Red.
+
 ## Information
 
 - Use the 'Secvest Command' node to set/unset/partset your Secvest. You can either inject a general msg and specify the command in the node configuration, or you inject a message with the command (set/unset/partset) as msg.payload. The output delivers the JSON response from the Secvest.
