@@ -148,7 +148,6 @@
         "type": "Status",
         "version": "0.0.1",
         "author": "Yves Reiser",
-        "desc": "secvest_status"
         "desc": "A node to check the Status of your ABUS Secvest",
         "keywords": "node-red,secvest,abus,alarm"
     },
