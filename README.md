@@ -10,7 +10,7 @@ Run the following command in your Node-RED user directory - typically `~/.node-r
 
         npm install node-red-contrib-secvest
 
-or install via 'Manage Panel' in Node-Red.
+or install via 'Manage palette' in Node-Red.
 
 ## Information
 
