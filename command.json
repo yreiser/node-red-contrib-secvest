@@ -2,7 +2,7 @@
     "id": "9adbc26d95d5d06e",
     "type": "subflow",
     "name": "Secvest Command",
-    "info": "Set/Unset/Partset your Abus Secvest Alarm System",
+    "info": "Set/Unset/Partset your Secvest",
     "category": "Secvest",
     "in": [
         {
@@ -130,15 +130,12 @@
     ],
     "meta": {
         "module": "secvest_command",
-        "type": "secvest_command",
+        "type": "Command",
         "version": "0.0.8",
         "author": "Yves Reiser",
         "desc": "A node to control your Abus Secvest Alarm System",
         "keywords": "node-red,secvest,abus,alarm",
         "license": "MIT"
-    },
-    "credentials": {
-        "password": ""
     },
     "color": "#FF8800",
     "inputLabels": [
@@ -151,7 +148,7 @@
             "type": "function",
             "z": "9adbc26d95d5d06e",
             "name": "function 1",
-            "func": "var command='none';\nif(msg.payload==\"unset\" || msg.payload==\"set\" || msg.payload==\"partset\"){\n    command = msg.payload;\n}\nelse{\n    command = env.get('command');\n}\nconst user = env.get('user')+':'+env.get('password');\nconst buf = Buffer.from(user)\nconst encoded = buf.toString(\"base64\");\nmsg.url ='https://'+env.get('ip')+':'+env.get('port')+'/system/partitions-'+env.get('partition')+'/';\nmsg.headers={\"Authorization\": \"Basic \"+encoded};\nmsg.payload = {\"state\": command};\nreturn msg;",
+            "func": "var command='none';\nif(msg.payload==\"unset\" || msg.payload==\"set\" || msg.payload==\"partset\"){\n    command = msg.payload;\n}\nelse{\n    command = env.get('command');\n}\nconst user = env.get('user')+':'+env.get('password');\nconst buf = Buffer.from(user)\nconst encoded = buf.toString(\"base64\");\nmsg.url ='https://'+env.get('ip')+':'+env.get('port')+'/system/partitions-'+env.get('partition')+'/';\nmsg.headers={\"Authorization\": \"Basic \"+encoded};\nmsg.payload = {\"state\": command};\nmsg.rejectUnauthorized = false;\nreturn msg;",
             "outputs": 1,
             "noerr": 0,
             "initialize": "",
@@ -174,7 +171,7 @@
             "ret": "txt",
             "paytoqs": "ignore",
             "url": "",
-            "tls": "73b09a94857bc102",
+            "tls": "",
             "persist": false,
             "proxy": "",
             "insecureHTTPParser": false,
@@ -204,20 +201,6 @@
             ]
         },
         {
-            "id": "73b09a94857bc102",
-            "type": "tls-config",
-            "name": "",
-            "cert": "",
-            "key": "",
-            "ca": "",
-            "certname": "",
-            "keyname": "",
-            "caname": "",
-            "servername": "",
-            "verifyservercert": false,
-            "alpnprotocol": ""
-        },
-        {
             "id": "edab89433883e120",
             "type": "subflow:9adbc26d95d5d06e",
             "z": "acb2df8b3c4eb35c",
@@ -238,8 +221,8 @@
                     "type": "cred"
                 }
             ],
-            "x": 450,
-            "y": 400,
+            "x": 410,
+            "y": 240,
             "wires": [
                 [
                     "73804a6c7c7b1129"

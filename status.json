@@ -2,7 +2,7 @@
     "id": "334e8e289bddfa97",
     "type": "subflow",
     "name": "Secvest Status",
-    "info": "Check the Status of your Secvest Alarm System",
+    "info": "Node to check the Status of your Secvest Alarm System",
     "category": "Secvest",
     "in": [
         {
@@ -145,12 +145,10 @@
     ],
     "meta": {
         "module": "secvest_status",
-        "type": "secvest_status",
+        "type": "Status",
         "version": "0.0.1",
         "author": "Yves Reiser",
-        "desc": "A node to check the status of your Abus Secvest Alarm System",
-        "license": "MIT",
-        "keywords": "node-red,secvest,abus,alarm"
+        "desc": "secvest_status"
     },
     "credentials": {
         "password": ""
@@ -166,7 +164,7 @@
             "type": "function",
             "z": "334e8e289bddfa97",
             "name": "function 2",
-            "func": "var command=env.get('get');\nconst user = env.get('user')+':'+env.get('password');\nconst buf = Buffer.from(user)\nconst encoded = buf.toString(\"base64\");\nconst base_url = msg.url = 'https://' + env.get('ip') + ':' + env.get('port');\n\nif(command == 'partitions'){\nmsg.url=base_url+'/system/partitions/';\n}\nelse if (command == 'details') {\n    msg.url = base_url + '/system/partitions-'+env.get('partition')+'/';\n}\nelse if (command == 'zones') {\n    msg.url = base_url + '/system/partitions-' + env.get('partition') + '/zones/';\n}\nelse if (command == 'output') {\n    msg.url = base_url + '/output/';\n}\nelse if (command == 'faults') {\n    msg.url = base_url + '/faults/';\n}\nelse if (command == 'logs') {\n    msg.url = base_url + '/logs/';\n}\n\nmsg.headers={\"Authorization\": \"Basic \"+encoded};\nmsg.payload = {\"state\": command};\nreturn msg;",
+            "func": "var command=env.get('get');\nconst user = env.get('user')+':'+env.get('password');\nconst buf = Buffer.from(user)\nconst encoded = buf.toString(\"base64\");\nconst base_url = msg.url = 'https://' + env.get('ip') + ':' + env.get('port');\n\nif(command == 'partitions'){\nmsg.url=base_url+'/system/partitions/';\n}\nelse if (command == 'details') {\n    msg.url = base_url + '/system/partitions-'+env.get('partition')+'/';\n}\nelse if (command == 'zones') {\n    msg.url = base_url + '/system/partitions-' + env.get('partition') + '/zones/';\n}\nelse if (command == 'output') {\n    msg.url = base_url + '/output/';\n}\nelse if (command == 'faults') {\n    msg.url = base_url + '/faults/';\n}\nelse if (command == 'logs') {\n    msg.url = base_url + '/logs/';\n}\n\nmsg.headers={\"Authorization\": \"Basic \"+encoded};\nmsg.payload = {\"state\": command};\nmsg.rejectUnauthorized = false;\nreturn msg;",
             "outputs": 1,
             "noerr": 0,
             "initialize": "",
@@ -184,19 +182,19 @@
             "id": "4932a648f0c04975",
             "type": "http request",
             "z": "334e8e289bddfa97",
-            "name": "",
+            "name": "request",
             "method": "GET",
             "ret": "txt",
             "paytoqs": "ignore",
             "url": "",
-            "tls": "73b09a94857bc102",
+            "tls": "",
             "persist": false,
             "proxy": "",
             "insecureHTTPParser": false,
             "authType": "",
             "senderr": false,
             "headers": [],
-            "x": 470,
+            "x": 460,
             "y": 200,
             "wires": [
                 [
@@ -219,30 +217,29 @@
             ]
         },
         {
-            "id": "73b09a94857bc102",
-            "type": "tls-config",
-            "name": "",
-            "cert": "",
-            "key": "",
-            "ca": "",
-            "certname": "",
-            "keyname": "",
-            "caname": "",
-            "servername": "",
-            "verifyservercert": false,
-            "alpnprotocol": ""
-        },
-        {
             "id": "46204c7143e76ae2",
             "type": "subflow:334e8e289bddfa97",
             "z": "acb2df8b3c4eb35c",
             "name": "",
             "env": [
                 {
+                    "name": "ip",
+                    "value": "192.168.40.10",
+                    "type": "str"
+                },
+                {
+                    "name": "user",
+                    "value": "Yves",
+                    "type": "str"
+                },
+                {
                     "name": "password",
                     "type": "cred"
                 }
             ],
+            "credentials": {
+                "password": "__PWRD__"
+            },
             "x": 400,
             "y": 140,
             "wires": [
