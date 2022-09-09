@@ -1,0 +1,160 @@
+[
+    {
+        "id": "91a3dce66a2c0e42",
+        "type": "tab",
+        "label": "Examples",
+        "disabled": false,
+        "info": "",
+        "env": []
+    },
+    {
+        "id": "ec63c414a82d7707",
+        "type": "secvest_command",
+        "z": "91a3dce66a2c0e42",
+        "name": "",
+        "ip": "192.168.10.100",
+        "port": "4433",
+        "user": "Yves",
+        "password": "",
+        "partition": "1",
+        "command": "",
+        "credentials": {
+            "password": "7777"
+        },
+        "x": 450,
+        "y": 200,
+        "wires": [
+            [
+                "eb233a8ab0a06cec"
+            ]
+        ]
+    },
+    {
+        "id": "11806c456af90af7",
+        "type": "inject",
+        "z": "91a3dce66a2c0e42",
+        "name": "",
+        "props": [
+            {
+                "p": "payload"
+            }
+        ],
+        "repeat": "",
+        "crontab": "",
+        "once": false,
+        "onceDelay": 0.1,
+        "topic": "",
+        "payload": "unset",
+        "payloadType": "str",
+        "x": 210,
+        "y": 200,
+        "wires": [
+            [
+                "ec63c414a82d7707"
+            ]
+        ]
+    },
+    {
+        "id": "eb233a8ab0a06cec",
+        "type": "debug",
+        "z": "91a3dce66a2c0e42",
+        "name": "debug 4",
+        "active": true,
+        "tosidebar": true,
+        "console": false,
+        "tostatus": false,
+        "complete": "false",
+        "statusVal": "",
+        "statusType": "auto",
+        "x": 720,
+        "y": 200,
+        "wires": []
+    },
+    {
+        "id": "fe8b514d50b9f2d8",
+        "type": "comment",
+        "z": "91a3dce66a2c0e42",
+        "name": "Example: unset alarm system",
+        "info": "",
+        "x": 240,
+        "y": 140,
+        "wires": []
+    },
+    {
+        "id": "bcecbde222e93ca6",
+        "type": "comment",
+        "z": "91a3dce66a2c0e42",
+        "name": "Example: list all zones of partition 1",
+        "info": "",
+        "x": 260,
+        "y": 320,
+        "wires": []
+    },
+    {
+        "id": "527f5b3bb9c3a2ef",
+        "type": "inject",
+        "z": "91a3dce66a2c0e42",
+        "name": "",
+        "props": [
+            {
+                "p": "payload"
+            },
+            {
+                "p": "topic",
+                "vt": "str"
+            }
+        ],
+        "repeat": "",
+        "crontab": "",
+        "once": false,
+        "onceDelay": 0.1,
+        "topic": "",
+        "payload": "",
+        "payloadType": "date",
+        "x": 200,
+        "y": 380,
+        "wires": [
+            [
+                "29f63a5629514318"
+            ]
+        ]
+    },
+    {
+        "id": "29f63a5629514318",
+        "type": "secvest_status",
+        "z": "91a3dce66a2c0e42",
+        "name": "",
+        "ip": "192.168.10.100",
+        "port": "4433",
+        "user": "Admin",
+        "password": "",
+        "partition": "1",
+        "get": "zones",
+        "credentials": {
+            "password": "1111"
+        },
+        "x": 420,
+        "y": 380,
+        "wires": [
+            [
+                "80dfe0373847986b"
+            ]
+        ]
+    },
+    {
+        "id": "80dfe0373847986b",
+        "type": "debug",
+        "z": "91a3dce66a2c0e42",
+        "name": "debug 5",
+        "active": true,
+        "tosidebar": true,
+        "console": false,
+        "tostatus": false,
+        "complete": "false",
+        "statusVal": "",
+        "statusType": "auto",
+        "x": 640,
+        "y": 380,
+        "wires": []
+    }
+]
