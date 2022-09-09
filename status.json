@@ -2,7 +2,7 @@
     "id": "334e8e289bddfa97",
     "type": "subflow",
     "name": "Secvest Status",
-    "info": "Node to check the Status of your Secvest Alarm System",
+    "info": "Check Status of your ABUS Secvest Alarm System",
     "category": "Secvest",
     "in": [
         {
@@ -149,6 +149,8 @@
         "version": "0.0.1",
         "author": "Yves Reiser",
         "desc": "secvest_status"
+        "desc": "A node to check the Status of your ABUS Secvest",
+        "keywords": "node-red,secvest,abus,alarm"
     },
     "credentials": {
         "password": ""

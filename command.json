@@ -2,7 +2,7 @@
     "id": "9adbc26d95d5d06e",
     "type": "subflow",
     "name": "Secvest Command",
-    "info": "Set/Unset/Partset your Secvest",
+    "info": "Set/Unset/Partset your ABUS Secvest",
     "category": "Secvest",
     "in": [
         {
@@ -133,7 +133,7 @@
         "type": "Command",
         "version": "0.0.8",
         "author": "Yves Reiser",
-        "desc": "A node to control your Abus Secvest Alarm System",
+        "desc": "A node to control your ABUS Secvest Alarm System",
         "keywords": "node-red,secvest,abus,alarm",
         "license": "MIT"
     },
