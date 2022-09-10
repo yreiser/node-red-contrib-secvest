@@ -8,7 +8,7 @@ Compatible with all ABUS Secvest FU5xxxx and FU6xxxx Systems.
 
 Run the following command in your Node-RED user directory - typically `~/.node-red`
 
-        npm install node-red-contrib-secvest
+        npm install @yreiser/node-red-contrib-secvest
 
 or install via 'Manage palette' in Node-Red.
 
