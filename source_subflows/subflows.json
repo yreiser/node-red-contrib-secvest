@@ -429,7 +429,7 @@
             },
             {
                 "name": "user",
-                "value": "Yves",
+                "value": "Admin",
                 "type": "str"
             },
             {
@@ -453,12 +453,12 @@
         "env": [
             {
                 "name": "ip",
-                "value": "192.168.40.10",
+                "value": "192.168.1.10",
                 "type": "str"
             },
             {
                 "name": "user",
-                "value": "Yves",
+                "value": "Admin",
                 "type": "str"
             },
             {
