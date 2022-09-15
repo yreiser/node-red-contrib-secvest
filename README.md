@@ -20,4 +20,8 @@ or install via 'Manage palette' in Node-Red.
 
 ## Note
 
-It takes 7 seconds for the Secvest REST API to respond.
+It takes 7 seconds for the Secvest REST API to respond the first time.
+
+## Version history
+
+- 0.1.8 added 'Partition State' option to the Status node. This will return the state of a partition as string.

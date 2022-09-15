@@ -2,7 +2,7 @@
     "id": "334e8e289bddfa97",
     "type": "subflow",
     "name": "Secvest Status",
-    "info": "Check Status of your ABUS Secvest Alarm System",
+    "info": "Check Status of your ABUS Secvest Alarm System ",
     "category": "Secvest",
     "in": [
         {
