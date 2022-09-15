@@ -1,6 +1,6 @@
 {
   "name": "@yreiser/node-red-contrib-secvest",
-  "version": "0.1.9",
+  "version": "0.1.10",
   "description": "Node-RED module for Abus Secvest Alarm Systems",
   "keywords": [
     "node-red", 

@@ -169,7 +169,7 @@
     "outputLabels": [
         "json"
     ],
-    "icon": "font-awesome/fa-flash",
+    "icon": "icon.png",
     "flow": [
         {
             "id": "6af9eaa97221b31b",
