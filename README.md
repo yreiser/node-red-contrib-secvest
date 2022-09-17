@@ -24,4 +24,4 @@ It takes 7 seconds for the Secvest REST API to respond the first time.
 
 ## Version history
 
-- 0.1.8 added 'Partition State' option to the Status node. This will return the state of a partition as string.
+- 0.2.0 Completely rewritten module. Includes configuration node and status display
