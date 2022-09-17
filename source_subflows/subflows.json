@@ -3,7 +3,7 @@
         "id": "334e8e289bddfa97",
         "type": "subflow",
         "name": "Secvest Status",
-        "info": "Node to check the Status of your Secvest Alarm System",
+        "info": "A node to check the Status of your ABUS Secvest",
         "category": "Secvest",
         "in": [
             {
@@ -18,11 +18,15 @@
         ],
         "out": [
             {
-                "x": 850,
+                "x": 970,
                 "y": 200,
                 "wires": [
                     {
-                        "id": "59b871fce2c956d7",
+                        "id": "c31c963c1dd8924d",
+                        "port": 0
+                    },
+                    {
+                        "id": "f02152a805ced214",
                         "port": 0
                     }
                 ]
@@ -95,7 +99,7 @@
             {
                 "name": "get",
                 "type": "str",
-                "value": "partitions",
+                "value": "state",
                 "ui": {
                     "label": {
                         "en-US": "get"
@@ -114,6 +118,12 @@
                                     "en-US": "Partition Details"
                                 },
                                 "v": "details"
+                            },
+                            {
+                                "l": {
+                                    "en-US": "Partition State"
+                                },
+                                "v": "state"
                             },
                             {
                                 "l": {
@@ -146,10 +156,12 @@
         ],
         "meta": {
             "module": "secvest_status",
-            "type": "Secvest",
+            "type": "Status",
             "version": "0.0.1",
             "author": "Yves Reiser",
-            "desc": "secvest_status"
+            "desc": "Check Status of your ABUS Secvest Alarm System",
+            "keywords": "node-red,secvest,abus,alarm",
+            "license": "MIT"
         },
         "color": "#FF8800",
         "outputLabels": [
@@ -162,7 +174,7 @@
         "type": "function",
         "z": "334e8e289bddfa97",
         "name": "function 2",
-        "func": "var command=env.get('get');\nconst user = env.get('user')+':'+env.get('password');\nconst buf = Buffer.from(user)\nconst encoded = buf.toString(\"base64\");\nconst base_url = msg.url = 'https://' + env.get('ip') + ':' + env.get('port');\n\nif(command == 'partitions'){\nmsg.url=base_url+'/system/partitions/';\n}\nelse if (command == 'details') {\n    msg.url = base_url + '/system/partitions-'+env.get('partition')+'/';\n}\nelse if (command == 'zones') {\n    msg.url = base_url + '/system/partitions-' + env.get('partition') + '/zones/';\n}\nelse if (command == 'output') {\n    msg.url = base_url + '/output/';\n}\nelse if (command == 'faults') {\n    msg.url = base_url + '/faults/';\n}\nelse if (command == 'logs') {\n    msg.url = base_url + '/logs/';\n}\n\nmsg.headers={\"Authorization\": \"Basic \"+encoded};\nmsg.payload = {\"state\": command};\nmsg.rejectUnauthorized = false;\nreturn msg;",
+        "func": "var command=env.get('get');\nconst user = env.get('user')+':'+env.get('password');\nconst buf = Buffer.from(user)\nconst encoded = buf.toString(\"base64\");\nconst base_url = msg.url = 'https://' + env.get('ip') + ':' + env.get('port');\n\nmsg.topic='other';\nif(command == 'partitions'){\nmsg.url=base_url+'/system/partitions/';\n}\nelse if (command == 'details') {\n    msg.url = base_url + '/system/partitions-'+env.get('partition')+'/';\n}\nelse if (command == 'zones') {\n    msg.url = base_url + '/system/partitions-' + env.get('partition') + '/zones/';\n}\nelse if (command == 'output') {\n    msg.url = base_url + '/output/';\n}\nelse if (command == 'faults') {\n    msg.url = base_url + '/faults/';\n}\nelse if (command == 'logs') {\n    msg.url = base_url + '/logs/';\n}\nelse if (command == 'state') {\n    msg.url = base_url + '/system/partitions-' + env.get('partition') + '/';\n    msg.topic = 'state';\n}\n\nmsg.headers={\"Authorization\": \"Basic \"+encoded};\nmsg.payload = {\"state\": command};\nmsg.rejectUnauthorized = false;\nreturn msg;",
         "outputs": 1,
         "noerr": 0,
         "initialize": "",
@@ -192,7 +204,7 @@
         "authType": "",
         "senderr": false,
         "headers": [],
-        "x": 460,
+        "x": 400,
         "y": 200,
         "wires": [
             [
@@ -208,8 +220,77 @@
         "property": "payload",
         "action": "",
         "pretty": false,
-        "x": 690,
+        "x": 570,
         "y": 200,
+        "wires": [
+            [
+                "87c2e69c83e234ef"
+            ]
+        ]
+    },
+    {
+        "id": "c31c963c1dd8924d",
+        "type": "function",
+        "z": "334e8e289bddfa97",
+        "name": "function 3",
+        "func": "msg.topic=\"\";\nreturn msg;",
+        "outputs": 1,
+        "noerr": 0,
+        "initialize": "",
+        "finalize": "",
+        "libs": [],
+        "x": 800,
+        "y": 200,
+        "wires": [
+            []
+        ]
+    },
+    {
+        "id": "87c2e69c83e234ef",
+        "type": "switch",
+        "z": "334e8e289bddfa97",
+        "name": "",
+        "property": "topic",
+        "propertyType": "msg",
+        "rules": [
+            {
+                "t": "eq",
+                "v": "other",
+                "vt": "str"
+            },
+            {
+                "t": "eq",
+                "v": "state",
+                "vt": "str"
+            }
+        ],
+        "checkall": "true",
+        "repair": false,
+        "outputs": 2,
+        "x": 690,
+        "y": 260,
+        "wires": [
+            [
+                "c31c963c1dd8924d"
+            ],
+            [
+                "f02152a805ced214"
+            ]
+        ]
+    },
+    {
+        "id": "f02152a805ced214",
+        "type": "function",
+        "z": "334e8e289bddfa97",
+        "name": "function 4",
+        "func": "msg.topic=\"\";\nmsg.payload=msg.payload.state;\nreturn msg;",
+        "outputs": 1,
+        "noerr": 0,
+        "initialize": "",
+        "finalize": "",
+        "libs": [],
+        "x": 880,
+        "y": 260,
         "wires": [
             []
         ]
@@ -218,7 +299,7 @@
         "id": "9adbc26d95d5d06e",
         "type": "subflow",
         "name": "Secvest Command",
-        "info": "Set/Unset/Partset your Secvest",
+        "info": "A node to control your ABUS Secvest Alarm System",
         "category": "Secvest",
         "in": [
             {
@@ -346,10 +427,10 @@
         ],
         "meta": {
             "module": "secvest_command",
-            "type": "Secvest",
+            "type": "Command",
             "version": "0.0.8",
             "author": "Yves Reiser",
-            "desc": "A node to control your Abus Secvest Alarm System",
+            "desc": "Set/Unset/Partset your ABUS Secvest",
             "keywords": "node-red,secvest,abus,alarm",
             "license": "MIT"
         },
@@ -424,17 +505,22 @@
         "env": [
             {
                 "name": "ip",
-                "value": "192.168.40.10",
+                "value": "192.168.10.100",
                 "type": "str"
             },
             {
                 "name": "user",
-                "value": "Admin",
+                "value": "Yves",
                 "type": "str"
             },
             {
                 "name": "password",
                 "type": "cred"
+            },
+            {
+                "name": "command",
+                "value": "partset",
+                "type": "str"
             }
         ],
         "x": 410,
@@ -453,17 +539,22 @@
         "env": [
             {
                 "name": "ip",
-                "value": "192.168.1.10",
+                "value": "192.168.10.100",
                 "type": "str"
             },
             {
                 "name": "user",
-                "value": "Admin",
+                "value": "Yves",
                 "type": "str"
             },
             {
                 "name": "password",
                 "type": "cred"
+            },
+            {
+                "name": "partition",
+                "value": "3",
+                "type": "str"
             }
         ],
         "x": 400,
