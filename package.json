@@ -1,0 +1,27 @@
+{
+  "name": "@yreiser/node-red-contrib-secvest",
+  "version": "0.2.0",
+  "description": "Module for the ABUS Secvest Alarm System",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "keywords": [
+    "node-red",
+    "abus",
+    "secvest",
+    "alarm"
+  ],
+  "node-red": {
+    "nodes": {
+      "status": "secvest_status.js",
+      "command": "secvest_command.js",
+      "server": "secvest_server.js"
+    }
+  },
+  "author": "Yves Reiser",
+  "license": "MIT",
+  "dependencies": {
+    "axios": "^0.27.2"
+  }
+}
