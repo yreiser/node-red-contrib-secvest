@@ -1,6 +1,6 @@
 {
   "name": "@yreiser/node-red-contrib-secvest",
-  "version": "0.2.1",
+  "version": "0.2.2",
   "description": "Module for the ABUS Secvest Alarm System",
   "main": "index.js",
   "scripts": {
@@ -23,5 +23,12 @@
   "license": "MIT",
   "dependencies": {
     "axios": "^0.27.2"
+  },
+  "bugs": {
+    "url": "https://github.com/yreiser/node-red-contrib-secvest/issues"
+  },
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/yreiser/node-red-contrib-secvest.git"
   }
 }
