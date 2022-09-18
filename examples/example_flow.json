@@ -1,6 +1,6 @@
 [
     {
-        "id": "b0798f562a5d90e7",
+        "id": "c9e2787b28410ce0",
         "type": "tab",
         "label": "Secvest",
         "disabled": false,
@@ -8,38 +8,9 @@
         "env": []
     },
     {
-        "id": "6810c5491f741a75",
+        "id": "d95000eaa1751236",
         "type": "inject",
-        "z": "b0798f562a5d90e7",
-        "name": "",
-        "props": [
-            {
-                "p": "payload"
-            },
-            {
-                "p": "topic",
-                "vt": "str"
-            }
-        ],
-        "repeat": "",
-        "crontab": "",
-        "once": false,
-        "onceDelay": 0.1,
-        "topic": "",
-        "payload": "inject",
-        "payloadType": "str",
-        "x": 130,
-        "y": 180,
-        "wires": [
-            [
-                "3ad881402a6edf43"
-            ]
-        ]
-    },
-    {
-        "id": "860bde5c71eede05",
-        "type": "inject",
-        "z": "b0798f562a5d90e7",
+        "z": "c9e2787b28410ce0",
         "name": "",
         "props": [
             {
@@ -61,46 +32,46 @@
         "y": 280,
         "wires": [
             [
-                "bd1e56e37335ee7a"
+                "43bd0b5e85745e54"
             ]
         ]
     },
     {
-        "id": "3ad881402a6edf43",
+        "id": "5f907b8c8134b675",
         "type": "Secvest Status",
-        "z": "b0798f562a5d90e7",
+        "z": "c9e2787b28410ce0",
         "name": "",
-        "server": "647040c3fead25e3",
-        "partition": "1",
-        "command": "details",
+        "server": "67c1d8818c300c5c",
+        "partition": "2",
+        "command": "state",
         "x": 320,
-        "y": 180,
+        "y": 140,
         "wires": [
             [
-                "8b5a8ce79095cbfa"
+                "11b4b284bf8c3259"
             ]
         ]
     },
     {
-        "id": "bd1e56e37335ee7a",
+        "id": "43bd0b5e85745e54",
         "type": "Secvest Command",
-        "z": "b0798f562a5d90e7",
+        "z": "c9e2787b28410ce0",
         "name": "",
-        "server": "647040c3fead25e3",
-        "partition": "1",
-        "command": "unset",
+        "server": "67c1d8818c300c5c",
+        "partition": "3",
+        "command": "payload",
         "x": 290,
         "y": 280,
         "wires": [
             [
-                "898a9ed2ebb8b79a"
+                "4f2b6056ab24624e"
             ]
         ]
     },
     {
-        "id": "8b5a8ce79095cbfa",
+        "id": "11b4b284bf8c3259",
         "type": "debug",
-        "z": "b0798f562a5d90e7",
+        "z": "c9e2787b28410ce0",
         "name": "debug 6",
         "active": true,
         "tosidebar": true,
@@ -110,13 +81,13 @@
         "statusVal": "",
         "statusType": "auto",
         "x": 520,
-        "y": 180,
+        "y": 140,
         "wires": []
     },
     {
-        "id": "898a9ed2ebb8b79a",
+        "id": "4f2b6056ab24624e",
         "type": "debug",
-        "z": "b0798f562a5d90e7",
+        "z": "c9e2787b28410ce0",
         "name": "debug 7",
         "active": true,
         "tosidebar": true,
@@ -130,9 +101,211 @@
         "wires": []
     },
     {
-        "id": "647040c3fead25e3",
+        "id": "bf05ed2ccfb54ffa",
+        "type": "inject",
+        "z": "c9e2787b28410ce0",
+        "name": "",
+        "props": [
+            {
+                "p": "payload"
+            },
+            {
+                "p": "topic",
+                "vt": "str"
+            }
+        ],
+        "repeat": "",
+        "crontab": "",
+        "once": false,
+        "onceDelay": 0.1,
+        "topic": "",
+        "payload": "",
+        "payloadType": "date",
+        "x": 120,
+        "y": 360,
+        "wires": [
+            [
+                "52796d6fc5c794c4"
+            ]
+        ]
+    },
+    {
+        "id": "52796d6fc5c794c4",
+        "type": "Secvest Command",
+        "z": "c9e2787b28410ce0",
+        "name": "",
+        "server": "67c1d8818c300c5c",
+        "partition": "3",
+        "command": "unset",
+        "x": 310,
+        "y": 360,
+        "wires": [
+            [
+                "42e83916b01f9215"
+            ]
+        ]
+    },
+    {
+        "id": "0d26397cd3bc3c83",
+        "type": "comment",
+        "z": "c9e2787b28410ce0",
+        "name": "Ex. : Get state of Partition 2",
+        "info": "",
+        "x": 180,
+        "y": 80,
+        "wires": []
+    },
+    {
+        "id": "fab19421665709cf",
+        "type": "comment",
+        "z": "c9e2787b28410ce0",
+        "name": "Ex. : 2 ways to unset Partition 3",
+        "info": "",
+        "x": 190,
+        "y": 220,
+        "wires": []
+    },
+    {
+        "id": "4929f7edbbd04ef0",
+        "type": "inject",
+        "z": "c9e2787b28410ce0",
+        "name": "",
+        "props": [
+            {
+                "p": "payload"
+            },
+            {
+                "p": "topic",
+                "vt": "str"
+            }
+        ],
+        "repeat": "",
+        "crontab": "",
+        "once": false,
+        "onceDelay": 0.1,
+        "topic": "",
+        "payload": "",
+        "payloadType": "date",
+        "x": 120,
+        "y": 140,
+        "wires": [
+            [
+                "5f907b8c8134b675"
+            ]
+        ]
+    },
+    {
+        "id": "42e83916b01f9215",
+        "type": "debug",
+        "z": "c9e2787b28410ce0",
+        "name": "debug 9",
+        "active": true,
+        "tosidebar": true,
+        "console": false,
+        "tostatus": false,
+        "complete": "false",
+        "statusVal": "",
+        "statusType": "auto",
+        "x": 500,
+        "y": 360,
+        "wires": []
+    },
+    {
+        "id": "3ab712549ea2f742",
+        "type": "comment",
+        "z": "c9e2787b28410ce0",
+        "name": "Ex. : partset Partition 1 via MQTT",
+        "info": "",
+        "x": 190,
+        "y": 440,
+        "wires": []
+    },
+    {
+        "id": "95caa7ccf01a799d",
+        "type": "mqtt in",
+        "z": "c9e2787b28410ce0",
+        "name": "",
+        "topic": "/secvest/cmd/",
+        "qos": "2",
+        "datatype": "auto-detect",
+        "broker": "",
+        "nl": false,
+        "rap": true,
+        "rh": 0,
+        "inputs": 0,
+        "x": 210,
+        "y": 560,
+        "wires": [
+            [
+                "2042c962194fac57"
+            ]
+        ]
+    },
+    {
+        "id": "2042c962194fac57",
+        "type": "Secvest Command",
+        "z": "c9e2787b28410ce0",
+        "name": "",
+        "server": "67c1d8818c300c5c",
+        "partition": "1",
+        "command": "payload",
+        "x": 430,
+        "y": 560,
+        "wires": [
+            []
+        ]
+    },
+    {
+        "id": "1d6340a33fafeae8",
+        "type": "mqtt out",
+        "z": "c9e2787b28410ce0",
+        "name": "",
+        "topic": "/secvest/cmd",
+        "qos": "",
+        "retain": "",
+        "respTopic": "",
+        "contentType": "",
+        "userProps": "",
+        "correl": "",
+        "expiry": "",
+        "broker": "",
+        "x": 340,
+        "y": 500,
+        "wires": []
+    },
+    {
+        "id": "1a9263f1132d9ff4",
+        "type": "inject",
+        "z": "c9e2787b28410ce0",
+        "name": "",
+        "props": [
+            {
+                "p": "payload"
+            },
+            {
+                "p": "topic",
+                "vt": "str"
+            }
+        ],
+        "repeat": "",
+        "crontab": "",
+        "once": false,
+        "onceDelay": 0.1,
+        "topic": "",
+        "payload": "partset",
+        "payloadType": "str",
+        "x": 110,
+        "y": 500,
+        "wires": [
+            [
+                "1d6340a33fafeae8"
+            ]
+        ]
+    },
+    {
+        "id": "67c1d8818c300c5c",
         "type": "ABUS Secvest",
-        "servername": "Secvest",
+        "servername": "Secvest_Example",
         "host": "192.168.1.100",
         "port": "4433",
         "user": "Admin",
