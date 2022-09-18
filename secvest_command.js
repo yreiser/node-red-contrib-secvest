@@ -9,12 +9,19 @@ module.exports = function(RED) {
         const port = this.server.port;
         const user = this.server.user;
         const password = this.server.password;
-        const partition = config.partition;
+        const part = config.partition;
         const command = config.command;
+        var partition = part;
 
         node.on('input', function(msg) {
+            if (part == 'topic'){
+                partition = msg.topic;
+            }
+
             inputMsgCommand = msg.payload;
+            
             const base_url  = 'https://' + host + ':' + port;
+            
             var jsonCommand;
             if (command == 'payload'){
                 jsonCommand={"state": inputMsgCommand};
