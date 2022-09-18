@@ -1,6 +1,6 @@
 {
   "name": "@yreiser/node-red-contrib-secvest",
-  "version": "0.2.2",
+  "version": "0.2.3",
   "description": "Module for the ABUS Secvest Alarm System",
   "main": "index.js",
   "scripts": {

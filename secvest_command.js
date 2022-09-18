@@ -20,7 +20,7 @@ module.exports = function(RED) {
                 jsonCommand={"state": inputMsgCommand};
             }
             else{
-                if(inputMsgCommand == 'unset' || inputMsgCommand == 'partset' || inputMsgCommand == 'set'){
+                if(command == 'unset' || command == 'partset' || command == 'set'){
                     jsonCommand={"state": command};
                 }
             }
