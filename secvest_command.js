@@ -81,7 +81,7 @@ module.exports = function (RED) {
           });
         })
         .catch(function (error) {
-          counterInterval(counterInterval);
+          clearInterval(counterInterval);
           node.status({ fill: "red", shape: "dot", text: "Error" });
         });
     });
