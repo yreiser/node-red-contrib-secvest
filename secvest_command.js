@@ -73,6 +73,5 @@ module.exports = function (RED) {
         });
     });
   }
-
   RED.nodes.registerType("Secvest Command", statusNode);
 };
