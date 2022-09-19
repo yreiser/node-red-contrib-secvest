@@ -55,10 +55,9 @@ module.exports = function (RED) {
           },
         })
         .then(function (response) {
-          if(outformat == 'full'){
-          finalmsg = response.data;
-          }
-          else if (outformat == 'state') { 
+          if (outformat == "full") {
+            finalmsg = response.data;
+          } else if (outformat == "state") {
             finalmsg = response.data.state;
           }
           msg.payload = finalmsg;
