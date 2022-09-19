@@ -46,7 +46,7 @@ module.exports = function (RED) {
           text: "Connecting (wait " + counter + ")",
         });
         counter -= 1;
-        if (counter == -1) {
+        if (counter <= -1) {
           clearInterval(counterInterval);
         }
       }
