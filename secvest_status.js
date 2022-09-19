@@ -31,27 +31,12 @@ module.exports = function (RED) {
       } else if (command == "state") {
         url = base_url + "/system/partitions-" + partition + "/";
       }
-      var counter = 5;
 
       node.status({
-        fill: "blue",
-        shape: "ring",
-        text: "Connecting",
+        fill: "green",
+        shape: "blue",
+        text: "Connecting (wait ~7s)",
       });
-
-      function countDown() {
-        node.status({
-          fill: "blue",
-          shape: "ring",
-          text: "Connecting (wait " + counter + ")",
-        });
-        counter -= 1;
-        if (counter <= -1) {
-          clearInterval(counterInterval);
-        }
-      }
-
-      counterInterval = setInterval(countDown, 1000);
 
       axios
         .get(url, {
@@ -65,7 +50,6 @@ module.exports = function (RED) {
         })
         .then(function (response) {
           finalmsg = response.data;
-          clearInterval(counterInterval);
           node.status({ fill: "green", shape: "dot", text: "OK" });
           if (command == "state") {
             finalmsg = finalmsg.state;
@@ -79,7 +63,6 @@ module.exports = function (RED) {
           node.send(msg);
         })
         .catch(function (error) {
-          clearInterval(counterInterval);
           node.status({ fill: "red", shape: "dot", text: "Error" });
         });
     });

@@ -37,24 +37,8 @@ module.exports = function (RED) {
       node.status({
         fill: "blue",
         shape: "ring",
-        text: "Connecting",
+        text: "Connecting (wait ~7s)",
       });
-
-      var counter = 5;
-
-      function countDown() {
-        node.status({
-          fill: "blue",
-          shape: "ring",
-          text: "Connecting (wait " + counter + ")",
-        });
-        counter -= 1;
-        if (counter <= -1) {
-          clearInterval(counterInterval);
-        }
-      }
-
-      counterInterval = setInterval(countDown, 1000);
 
       axios
         .put(url, jsonCommand, {
@@ -73,7 +57,6 @@ module.exports = function (RED) {
           finalmsg = response.data;
           msg.payload = finalmsg;
           node.send(msg);
-          clearInterval(counterInterval);
           node.status({
             fill: "green",
             shape: "dot",
@@ -81,7 +64,6 @@ module.exports = function (RED) {
           });
         })
         .catch(function (error) {
-          clearInterval(counterInterval);
           node.status({ fill: "red", shape: "dot", text: "Error" });
         });
     });
