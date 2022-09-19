@@ -57,16 +57,21 @@ module.exports = function (RED) {
         .then(function (response) {
           if (outformat == "full") {
             finalmsg = response.data;
+            node.status({
+              fill: "green",
+              shape: "dot",
+              text: "Partition " + finalmsg.id + " : " + finalmsg.state,
+            });
           } else if (outformat == "state") {
             finalmsg = response.data.state;
+            node.status({
+              fill: "green",
+              shape: "dot",
+              text: "Partition " + partition + " : " + finalmsg,
+            });
           }
           msg.payload = finalmsg;
           node.send(msg);
-          node.status({
-            fill: "green",
-            shape: "dot",
-            text: "Partition " + finalmsg.id + " : " + finalmsg.state,
-          });
         })
         .catch(function (error) {
           node.status({ fill: "red", shape: "dot", text: "Error" });
