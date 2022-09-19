@@ -33,8 +33,8 @@ module.exports = function (RED) {
       }
 
       node.status({
-        fill: "green",
-        shape: "blue",
+        fill: "blue",
+        shape: "ring",
         text: "Connecting (wait ~7s)",
       });
 
