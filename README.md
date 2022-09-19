@@ -23,5 +23,6 @@ It takes 7 seconds for the Secvest REST API to respond the first time.
 
 ## Version history
 
+- 2.0.12 Added different output msg formats for 'Command' Nodes
 - 2.0.5 New feature: select partition via msg.payload on 'Secvest Command' nodes
 - 2.0.0 Completely rewritten module. Includes configuration node and status display

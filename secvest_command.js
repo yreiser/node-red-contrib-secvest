@@ -12,6 +12,7 @@ module.exports = function (RED) {
     const password = this.server.password;
     const part = config.partition;
     const command = config.command;
+    const outformat = config.outformat;
     var partition = part;
 
     node.on("input", function (msg) {
@@ -54,7 +55,12 @@ module.exports = function (RED) {
           },
         })
         .then(function (response) {
+          if(outformat == 'full'){
           finalmsg = response.data;
+          }
+          else if (outformat == 'state') { 
+            finalmsg = response.data.state;
+          }
           msg.payload = finalmsg;
           node.send(msg);
           node.status({
